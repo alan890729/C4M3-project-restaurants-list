@@ -1,0 +1,21 @@
+{
+  "name": "c3m3-project-restaurants-list",
+  "version": "1.0.0",
+  "description": "add your favorite restaurants in the list",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "express",
+    "server",
+    "project"
+  ],
+  "author": "Alan Huang",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.3"
+  }
+}
