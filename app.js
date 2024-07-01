@@ -1,7 +1,6 @@
 const express = require('express')
 const { engine } = require('express-handlebars')
 const restaurants = require('./public/jsons/restaurant.json').results
-console.log(restaurants)
 const app = express()
 const port = 3000
 
@@ -23,6 +22,21 @@ app.get('/restaurant/:id', (req, res) => {
   const id = req.params.id
   const restaurant = restaurants.find(restaurant => restaurant.id.toString() === id)
   res.render('show', { restaurant })
+})
+
+app.get('/search', (req, res) => {
+  const keyword = req.query.keyword?.toLowerCase().trim()
+
+  const matchedRestaurants = restaurants.filter(restaurant => 
+    Object.keys(restaurant).some(key => {
+      if (key === 'name' || key === 'category') {
+        return restaurant[key].toLowerCase().includes(keyword) 
+      }
+      return false
+    })
+  )
+  
+  res.render('index', { restaurants: matchedRestaurants, keyword })
 })
 
 app.listen(port, () => {
