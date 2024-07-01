@@ -27,15 +27,20 @@ app.get('/restaurant/:id', (req, res) => {
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword?.toLowerCase().trim()
 
-  const matchedRestaurants = restaurants.filter(restaurant => 
+  const matchedRestaurants = restaurants.filter(restaurant =>
     Object.keys(restaurant).some(key => {
       if (key === 'name' || key === 'category') {
-        return restaurant[key].toLowerCase().includes(keyword) 
+        return restaurant[key].toLowerCase().includes(keyword)
       }
       return false
     })
   )
-  
+
+  if (!matchedRestaurants.length) {
+    res.render('unmatched', { keyword })
+    return // 沒有return會報錯: cannot set headers after they are sent to the client
+  }
+
   res.render('index', { restaurants: matchedRestaurants, keyword })
 })
 
