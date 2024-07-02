@@ -4,12 +4,12 @@
 
 ## 專案畫面
 
-![image](https://github.com/alan890729/C3M3-project-restaurants-list/public/images/project-snapshot-restaurants-1.png)
-![image](https://github.com/alan890729/C3M3-project-restaurants-list/public/images/project-snapshot-restaurants-2.png)
-![image](https://github.com/alan890729/C3M3-project-restaurants-list/public/images/project-snapshot-restaurant-1.png)
-![image](https://github.com/alan890729/C3M3-project-restaurants-list/public/images/project-snapshot-search-1.png)
-![image](https://github.com/alan890729/C3M3-project-restaurants-list/public/images/project-snapshot-search-2.png)
-![image](https://github.com/alan890729/C3M3-project-restaurants-list/public/images/project-snapshot-search-unmatched.png)
+![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/project-snapshot-restaurants-1.png)
+![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/project-snapshot-restaurants-2.png)
+![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/project-snapshot-restaurant-1.png)
+![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/project-snapshot-search-1.png)
+![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/project-snapshot-search-2.png)
+![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/project-snapshot-search-unmatched.png)
 
 ## Features - 產品功能
 
@@ -35,7 +35,37 @@
 
 ### Installing - 專案安裝流程
 
-1. 我先跑一次安裝流程，之後補
+1. 打開terminal，輸入
+```
+git clone https://github.com/alan890729/C3M3-project-restaurants-list.git
+```
+
+2. 開啟終端機(Terminal)，進入存放此專案的資料夾
+```
+cd C3M3-project-restaurants-list
+```
+
+3. 安裝 npm 套件
+```
+npm install
+```
+
+4. 是否已經安裝nodemon  
+  - 已有nodemon，直接輸入以下指令啟動專案
+  ```
+  npm run dev
+  ```
+  server會在 <http://localhost:3000> 執行
+
+  - 還沒有安裝nodemon，先退回前一個路徑，在global安裝nodemon。輸入：
+  ```
+  npm install -g nodemon
+  ```
+
+  接著再回到 **C3M3-project-restaurants-list** 資料夾內，輸入：
+  ```
+  npm run dev
+  ```
 
 ## Authors
 
