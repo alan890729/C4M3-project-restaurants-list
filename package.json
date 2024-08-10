@@ -1,5 +1,5 @@
 {
-  "name": "c3m3-project-restaurants-list",
+  "name": "c4m1-project-restaurants-list",
   "version": "1.0.0",
   "description": "add your favorite restaurants in the list",
   "main": "app.js",
@@ -16,6 +16,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
-    "express-handlebars": "^7.1.3"
+    "express-handlebars": "^7.1.3",
+    "mysql2": "^3.11.0",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2"
   }
 }

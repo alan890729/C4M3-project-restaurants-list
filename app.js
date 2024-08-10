@@ -15,22 +15,22 @@ app.get('/', (req, res) => {
 })
 
 app.get('/restaurants', (req, res) => {
-  res.render('index', { restaurants })
+  res.render('restaurants', { restaurants })
 })
 
-app.get('/restaurant/:id', (req, res) => {
+app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   const restaurant = restaurants.find(restaurant => restaurant.id.toString() === id)
-  res.render('show', { restaurant })
+  res.render('detail', { restaurant })
 })
 
 app.get('/search', (req, res) => {
-  const keyword = req.query.keyword?.toLowerCase().trim()
+  const keyword = req.query.keyword?.trim()
 
   const matchedRestaurants = restaurants.filter(restaurant =>
     Object.keys(restaurant).some(key => {
       if (key === 'name' || key === 'category') {
-        return restaurant[key].toLowerCase().includes(keyword)
+        return restaurant[key].toLowerCase().includes(keyword.toLowerCase())
       }
       return false
     })
@@ -41,7 +41,7 @@ app.get('/search', (req, res) => {
     return // 沒有return會報錯: cannot set headers after they are sent to the client
   }
 
-  res.render('index', { restaurants: matchedRestaurants, keyword })
+  res.render('restaurants', { restaurants: matchedRestaurants, keyword })
 })
 
 app.listen(port, () => {
