@@ -2,11 +2,11 @@ header {
   overflow: hidden;
 }
 
-.navbar .navbar-brand {
+.navbar .navbar-brand, .nav-link {
   color: #4592af;
 }
 
-.navbar .navbar-brand:hover {
+.navbar .navbar-brand:hover, .nav-link:hover {
   color: #226089;
 }
 

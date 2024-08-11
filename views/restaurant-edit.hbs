@@ -1,0 +1,101 @@
+{{#with restaurant}}
+    <div class="container mt-3">
+
+        <form action="/restaurants/{{id}}?_method=PUT" method="post">
+
+            <div class="mb-3 row">
+                <div class="col-sm-4">
+                    <label for="restaurant-name-zh" class="form-label">餐廳名字：</label>
+                </div>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="restaurant-name-zh" name="name" value="{{name}}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <div class="col-sm-4">
+                    <label for="restaurant-name-en" class="form-label">餐廳名字（英文）：</label>
+                </div>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="restaurant-name-en" name="name_en" value="{{name_en}}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <div class="col-sm-4">
+                    <label for="restaurant-category" class="form-label">餐廳分類：</label>
+                </div>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="restaurant-category" name="category" list="category-list" value="{{category}}">
+                    <datalist id="category-list">
+                        {{#each ../categories}}
+                        <option value="{{this}}"></option>
+                        {{/each}}
+                    </datalist>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <div class="col-sm-4">
+                    <label for="restaurant-image-link" class="form-label">照片（網址）：</label>
+                </div>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="restaurant-image-link" name="image" value="{{image}}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <div class="col-sm-4">
+                    <label for="restaurant-location" class="form-label">地址：</label>
+                </div>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="restaurant-location" name="location" value="{{location}}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <div class="col-sm-4">
+                    <label for="restaurant-phone-number" class="form-label">電話：</label>
+                </div>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="restaurant-phone-number" name="phone" value="{{phone}}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <div class="col-sm-4">
+                    <label for="restaurant-google-map" class="form-label">Google Map（網址）：</label>
+                </div>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="restaurant-google-map" name="google_map" value="{{google_map}}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <div class="col-sm-4">
+                    <label for="restaurant-rating" class="form-label">評分：</label>
+                </div>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="restaurant-rating" name="rating" value="{{rating}}" min="0" max="5"
+                        step="0.1">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="col-sm-4">
+                    <label for="restaurant-description" class="form-label">簡短描述這間餐廳：</label>
+                </div>
+                <div class="col-sm-8">
+                    <textarea class="form-control" id="restaurant-description" name="description" rows="3"
+                        maxlength="300">{{description}}</textarea>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-light">保存</button>
+            </div>
+
+        </form>
+
+    </div>
+{{/with}}

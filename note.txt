@@ -7,7 +7,7 @@
 使用者可以新增一家餐廳
     * 點擊'add new restaurants'取得新增新的餐廳頁面：GET /restaurants/new
     * 填寫要新增的餐廳的資料後，按'create'新增餐廳：POST /restaurants
-使用者可以修改一家餐廳的資訊：PUT /restaurants/:id
+使用者可以修改一家餐廳的資訊
     * 點擊'edit'去取得編輯指定餐廳的頁面：GET /restaurants/:id/edit
     * 修改要修改的資訊後按'save'儲存修改：PUT /restaurants/:id
 使用者可以按下'delete'刪除指定餐廳：DELETE /restaurants/:id
