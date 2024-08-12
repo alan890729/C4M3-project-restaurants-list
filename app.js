@@ -2,7 +2,6 @@ const express = require('express')
 const { engine } = require('express-handlebars')
 const methodOverride = require('method-override')
 const { Op } = require('sequelize')
-// const restaurants = require('./public/jsons/restaurant.json').results
 const db = require('./models')
 const Restaurant = db.Restaurant
 const app = express()
@@ -129,6 +128,34 @@ app.put('/restaurants/:id', (req, res) => {
         res.status(422).json(err)
     })
     
+})
+
+// 做一個delete confirm頁面
+app.get('/restaurants/:id/delete-confirm', (req, res) => {
+    const id = req.params.id
+
+    return Restaurant.findByPk(Number(id), {
+        raw: true
+    }).then((restaurant) => {
+        const { id, name } = restaurant
+        res.render('delete-confirm', { id, name })
+    }).catch((err) => {
+        res.status(422).json(err)
+    })
+})
+
+app.delete('/restaurants/:id', (req, res) => {
+    const id = req.params.id
+
+    return Restaurant.destroy({
+        where: {
+            id: Number(id)
+        }
+    }).then((results) => {
+        res.redirect('/restaurants')
+    }).catch((err) => {
+        res.status(422).json(err)
+    })
 })
 
 app.get('/search', (req, res) => {
