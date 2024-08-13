@@ -4,12 +4,12 @@
 
 ## 專案畫面
 
-![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/project-snapshot-restaurants-1.png)
-![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/project-snapshot-restaurants-2.png)
-![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/project-snapshot-restaurant-1.png)
-![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/project-snapshot-search-1.png)
-![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/project-snapshot-search-2.png)
-![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/project-snapshot-search-unmatched.png)
+![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/read-all-restaurants.png)
+![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/read-detail-restaurants.png)
+![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/search-restaurant-ci.png)
+![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/search-restaurant-category.png)
+![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/create-restaurant.png)
+![image](https://github.com/alan890729/C3M3-project-restaurants-list/blob/main/public/images/edit-restaurant.png)
 
 ## Features - 產品功能
 
@@ -17,6 +17,9 @@
 2. 使用者可以點擊某餐廳瀏覽該餐廳的細節資訊
 3. 使用者可以依照店名進行搜尋
 4. 使用者可以依照餐廳類別進行搜尋
+5. 使用者可以新增餐廳到清單
+6. 使用者可以編輯清單中的餐廳
+7. 使用者可以刪除清單中的餐廳
 
 ## Getting Started - 啟動專案
 
@@ -32,17 +35,21 @@
 - [Bootstrap - v5.2.1](https://www.jsdelivr.com/package/npm/bootstrap?tab=files&version=5.2.1&path=dist)
 - [font-awesome - v5.8.1](https://cdnjs.com/libraries/font-awesome/5.8.1)
 - [Express-handlebars - v7.1.3](https://www.npmjs.com/package/express-handlebars)
+- [mysql2](https://www.npmjs.com/package/mysql2)
+- [sequelize](https://www.npmjs.com/package/sequelize)
+- [sequelize-cli](https://www.npmjs.com/package/sequelize-cli)
+- [method-override](https://www.npmjs.com/package/method-override)
 
 ### Installing - 專案安裝流程
 
 1. 打開terminal，輸入
 ```
-git clone https://github.com/alan890729/C3M3-project-restaurants-list.git
+git clone https://github.com/alan890729/C4M1-project-restaurants-list.git
 ```
 
 2. 開啟終端機(Terminal)，進入存放此專案的資料夾
 ```
-cd C3M3-project-restaurants-list
+cd C4M1-project-restaurants-list
 ```
 
 3. 安裝 npm 套件
@@ -62,7 +69,7 @@ npm install
   npm install -g nodemon
   ```
 
-  接著再回到 **C3M3-project-restaurants-list** 資料夾內，輸入：
+  接著再回到 **C4M1-project-restaurants-list** 資料夾內，輸入：
   ```
   npm run dev
   ```
