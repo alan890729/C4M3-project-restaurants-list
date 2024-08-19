@@ -1,13 +1,28 @@
-原功能：
-使用者可以瀏覽全部的餐廳：GET /restaurants
-使用者可以瀏覽特定餐廳：GET /restaurants/:id
-使用者可以搜尋餐廳，沒有符合都搜尋結果會有特定畫面：GET /search
+C4M1
+    原功能：
+    使用者可以瀏覽全部的餐廳：GET /restaurants
+    使用者可以瀏覽特定餐廳：GET /restaurants/:id
+    使用者可以搜尋餐廳，沒有符合都搜尋結果會有特定畫面：GET /search
 
-新功能：
-使用者可以新增一家餐廳
-    * 點擊'add new restaurants'取得新增新的餐廳頁面：GET /restaurants/new
-    * 填寫要新增的餐廳的資料後，按'create'新增餐廳：POST /restaurants
-使用者可以修改一家餐廳的資訊
-    * 點擊'edit'去取得編輯指定餐廳的頁面：GET /restaurants/:id/edit
-    * 修改要修改的資訊後按'save'儲存修改：PUT /restaurants/:id
-使用者可以按下'delete'刪除指定餐廳：DELETE /restaurants/:id
+    新功能：
+    使用者可以新增一家餐廳
+        * 點擊'add new restaurants'取得新增新的餐廳頁面：GET /restaurants/new
+        * 填寫要新增的餐廳的資料後，按'create'新增餐廳：POST /restaurants
+    使用者可以修改一家餐廳的資訊
+        * 點擊'edit'去取得編輯指定餐廳的頁面：GET /restaurants/:id/edit
+        * 修改要修改的資訊後按'save'儲存修改：PUT /restaurants/:id
+    使用者可以按下'delete'刪除指定餐廳：DELETE /restaurants/:id
+
+C4M2
+    重構：
+    [o] restaurants router 
+    middleware
+        message handler
+        custom error handler
+    show flash message(either success-msg or err-msg) by partial template
+    environment variable
+
+    挑戰項目：
+    sort功能，需求看作業提供的規格
+
+    最後在調整畫面跟wireframe一樣
