@@ -5,17 +5,18 @@ const { Op } = require('sequelize')
 const router = express.Router()
 const Restaurant = db.Restaurant
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
     return Restaurant.findAll({
         raw: true
     }).then((restaurants) => {
         return res.render('restaurants', { restaurants })
     }).catch((err) => {
-        return res.status(422).json(err)
+        err.err_msg = '資料取得失敗'
+        next(err)
     })
 })
 
-router.get('/new', (req, res) => {
+router.get('/new', (req, res, next) => {
     const restaurantCategories = []
 
     return Restaurant.findAll(
@@ -30,10 +31,13 @@ router.get('/new', (req, res) => {
             }
         })
         return res.render('new-restaurant', { categories: restaurantCategories })
+    }).catch((err) => {
+        err.err_msg = '取得新增餐廳頁面失敗'
+        next(err)
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
     const body = req.body
     body.rating = Number(body.rating)
 
@@ -41,11 +45,12 @@ router.post('/', (req, res) => {
         req.flash('success-msg', '新增成功')
         return res.redirect('/restaurants')
     }).catch((err) => {
-        return res.status(422).json(err)
+        err.err_msg = '新增餐廳失敗'
+        next(err)
     })
 })
 
-router.get('/search', (req, res) => {
+router.get('/search', (req, res, next) => {
     console.log('on route: /restaurants/search')
     const keyword = req.query.keyword?.trim()
 
@@ -70,11 +75,11 @@ router.get('/search', (req, res) => {
             return res.render('restaurants', { restaurants: data, keyword })
         }
     }).catch((err) => {
-        return res.status(422).json(err)
+        next(err)
     })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
     const id = req.params.id
 
     return Restaurant.findByPk(
@@ -85,11 +90,12 @@ router.get('/:id', (req, res) => {
     ).then((restaurant) => {
         return res.render('detail', { restaurant })
     }).catch((err) => {
-        return res.status(422).json(err)
+        err.err_msg = '取得餐廳細部資料失敗'
+        next(err)
     })
 })
 
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', (req, res, next) => {
     const id = req.params.id
 
     return Promise.all(
@@ -122,11 +128,11 @@ router.get('/:id/edit', (req, res) => {
         })
         return res.render('restaurant-edit', { restaurant, categories: restaurantCategories })
     }).catch((err) => {
-        return res.status(422).json(err)
+        next(err)
     })
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', (req, res, next) => {
     const id = req.params.id
     const body = req.body
     body.rating = Number(body.rating)
@@ -142,13 +148,14 @@ router.put('/:id', (req, res) => {
         req.flash('success-msg', '編輯成功')
         return res.redirect(`/restaurants/${id}`)
     }).catch((err) => {
-        return res.status(422).json(err)
+        err.err_msg = '編輯餐廳資料失敗'
+        next(err)
     })
 
 })
 
 // 做一個delete confirm頁面
-router.get('/:id/delete-confirm', (req, res) => {
+router.get('/:id/delete-confirm', (req, res, next) => {
     const id = req.params.id
 
     return Restaurant.findByPk(Number(id), {
@@ -157,11 +164,12 @@ router.get('/:id/delete-confirm', (req, res) => {
         const { id, name } = restaurant
         return res.render('delete-confirm', { id, name })
     }).catch((err) => {
-        return res.status(422).json(err)
+        err.err_msg = '取得確認刪除頁失敗'
+        next(err)
     })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res, next) => {
     const id = req.params.id
     const deleteRestaurantName = req.body.delete_restaurant_name
 
@@ -174,7 +182,8 @@ router.delete('/:id', (req, res) => {
         req.flash('delete-restaurant-name', deleteRestaurantName)
         return res.redirect('/restaurants')
     }).catch((err) => {
-        return res.status(422).json(err)
+        err.err_msg = '刪除餐廳失敗'
+        next(err)
     })
 })
 

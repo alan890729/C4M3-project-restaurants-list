@@ -1,6 +1,8 @@
 {{#with restaurant}}
     <div class="container mt-3">
 
+        {{> flash-msg success_msg=../success_msg err_msg=../err_msg}}
+
         <form action="/restaurants/{{id}}?_method=PUT" method="post">
 
             <div class="mb-3 row">

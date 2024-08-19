@@ -5,6 +5,7 @@ const router = require('./routes')
 const session = require('express-session')
 const flash = require('connect-flash')
 const flashMessageHandler = require('./middlewares/flash-message-handler')
+const errorHandler = require('./middlewares/error-handler')
 
 const app = express()
 const port = 3000
@@ -25,6 +26,8 @@ app.use(flash())
 app.use(flashMessageHandler)
 
 app.use(router)
+
+app.use(errorHandler)
 
 app.listen(port, () => {
     console.log(`express sever running on http://localhost:${port}`)
