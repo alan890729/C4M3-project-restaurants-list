@@ -1,0 +1,11 @@
+{{#if success_msg}}
+<div class="container mt-3">
+    <div class="alert alert-success" role="alert">
+        {{#if delete_restaurant_name}}
+            {{success_msg}} {{delete_restaurant_name}}
+        {{else}}
+            {{success_msg}}
+        {{/if}}
+    </div>
+</div>
+{{/if}}

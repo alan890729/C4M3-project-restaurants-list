@@ -17,7 +17,11 @@ C4M2
     重構：
     [o] restaurants router 
     middleware
-        message handler
+        message handler：
+            * [o] 新增一餐廳後要有提示訊息
+            * [o] 編輯某餐廳後要有提示訊息
+            * [o] 刪除某餐廳後要有提示訊息
+            * error event要有錯誤訊息
         custom error handler
     show flash message(either success-msg or err-msg) by partial template
     environment variable

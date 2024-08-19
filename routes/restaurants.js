@@ -38,6 +38,7 @@ router.post('/', (req, res) => {
     body.rating = Number(body.rating)
 
     return Restaurant.create(body).then((results) => {
+        req.flash('success-msg', '新增成功')
         return res.redirect('/restaurants')
     }).catch((err) => {
         return res.status(422).json(err)
@@ -74,7 +75,6 @@ router.get('/search', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-    console.log('fuckers')
     const id = req.params.id
 
     return Restaurant.findByPk(
@@ -139,6 +139,7 @@ router.put('/:id', (req, res) => {
             }
         }
     ).then((results) => {
+        req.flash('success-msg', '編輯成功')
         return res.redirect(`/restaurants/${id}`)
     }).catch((err) => {
         return res.status(422).json(err)
@@ -162,12 +163,15 @@ router.get('/:id/delete-confirm', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     const id = req.params.id
+    const deleteRestaurantName = req.body.delete_restaurant_name
 
     return Restaurant.destroy({
         where: {
             id: Number(id)
         }
     }).then((results) => {
+        req.flash('success-msg', '成功刪除')
+        req.flash('delete-restaurant-name', deleteRestaurantName)
         return res.redirect('/restaurants')
     }).catch((err) => {
         return res.status(422).json(err)
