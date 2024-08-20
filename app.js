@@ -7,6 +7,10 @@ const flash = require('connect-flash')
 const flashMessageHandler = require('./middlewares/flash-message-handler')
 const errorHandler = require('./middlewares/error-handler')
 
+if (process.env.NODE_ENV === 'development') {
+    require('dotenv').config()
+}
+
 const app = express()
 const port = 3000
 
@@ -18,7 +22,7 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(session({
-    secret: 'MySecret',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
 }))
