@@ -6,7 +6,15 @@ const router = express.Router()
 const Restaurant = db.Restaurant
 
 router.get('/', (req, res, next) => {
+    const incomingSortStatus = req.query.sortStatus || 'none'
+
     return Restaurant.findAll({
+        order:
+            incomingSortStatus === 'alphabetAsc' ? [['name_en', 'ASC']]
+            : incomingSortStatus === 'alphabetDesc' ? [['name_en', 'DESC']]
+            : incomingSortStatus === 'categories' ? [['category', 'ASC']]
+            : incomingSortStatus === 'location'? [['location', 'ASC']]
+            : [],
         raw: true
     }).then((restaurants) => {
         return res.render('restaurants', { restaurants })
