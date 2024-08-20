@@ -64,7 +64,7 @@
 
 4. 在MySQL WorkBench建立一個名為restaurants-list的資料庫
 
-    以下提供兩個方案，一是資料庫中沒有存在與restaurants-list同名的資料庫推薦的設定方法，二是資料庫已存在restaurants-list資料庫，所以建立另一個資料庫，用途是來執行此專案
+    以下提供兩個方案，一是資料庫中沒有存在與restaurants-list同名的資料庫，二是資料庫已存在restaurants-list資料庫，所以建立另一個資料庫，用途是來執行此專案
 
     - 資料庫沒有與restaurants-list同名的資料庫
 
