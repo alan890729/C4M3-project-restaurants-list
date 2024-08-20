@@ -1,6 +1,7 @@
 const express = require('express')
 const db = require('../models')
 const { Op } = require('sequelize')
+const { getOrderCondition, sortButtonActiveSwitcher } = require('../scripts/sort-restaurants')
 
 const router = express.Router()
 const Restaurant = db.Restaurant
@@ -8,13 +9,10 @@ const Restaurant = db.Restaurant
 router.get('/', (req, res, next) => {
     const incomingSortStatus = req.query.sortStatus || 'none'
 
+    sortButtonActiveSwitcher(res, incomingSortStatus)
+
     return Restaurant.findAll({
-        order:
-            incomingSortStatus === 'alphabetAsc' ? [['name_en', 'ASC']]
-            : incomingSortStatus === 'alphabetDesc' ? [['name_en', 'DESC']]
-            : incomingSortStatus === 'categories' ? [['category', 'ASC']]
-            : incomingSortStatus === 'location'? [['location', 'ASC']]
-            : [],
+        order: getOrderCondition(incomingSortStatus),
         raw: true
     }).then((restaurants) => {
         return res.render('restaurants', { restaurants })
@@ -59,7 +57,6 @@ router.post('/', (req, res, next) => {
 })
 
 router.get('/search', (req, res, next) => {
-    console.log('on route: /restaurants/search')
     const keyword = req.query.keyword?.trim()
 
     return Restaurant.findAll(
@@ -80,7 +77,7 @@ router.get('/search', (req, res, next) => {
         if (!data.length) {
             return res.render('unmatched', { keyword })
         } else {
-            return res.render('restaurants', { restaurants: data, keyword })
+            return res.render('restaurants-search', { restaurants: data, keyword })
         }
     }).catch((err) => {
         next(err)

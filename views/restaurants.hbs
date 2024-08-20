@@ -16,50 +16,62 @@
   </div>
 </div>
 
-<div class="btn-group">
+<div class="container mt-3">
 
-  <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    sort
-  </button>
+  <div class="row">
 
-  <ul class="dropdown-menu">
+    <div class="col-md-10 col-12 mx-auto d-flex justify-content-end">
 
-    <li>
-      <form action="/restaurants" method="get">
-        <input type="hidden" name="sortStatus" value="alphabetAsc">
-        <button type="submit" class="dropdown-item">A - Z</button>
-      </form>
-    </li>
+      <div class="btn-group">
 
-    <li>
-      <form action="/restaurants" method="get">
-        <input type="hidden" name="sortStatus" value="alphabetDesc">
-        <button type="submit" class="dropdown-item">Z - A</button>
-      </form>
-    </li>
+        <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          sort
+        </button>
 
-    <li>
-      <form action="/restaurants" method="get">
-        <input type="hidden" name="sortStatus" value="categories">
-        <button type="submit" class="dropdown-item">類別</button>
-      </form>
-    </li>
+        <ul class="dropdown-menu">
 
-    <li>
-      <form action="/restaurants" method="get">
-        <input type="hidden" name="sortStatus" value="location">
-        <button type="submit" class="dropdown-item">地區</button>
-      </form>
-    </li>
+          <li>
+            <form action="/restaurants" method="get">
+              <input type="hidden" name="sortStatus" value="alphabetAsc">
+              <button type="submit" class="dropdown-item {{#if alphabetAsc}} active {{/if}} ">A - Z</button>
+            </form>
+          </li>
 
-  </ul>
+          <li>
+            <form action="/restaurants" method="get">
+              <input type="hidden" name="sortStatus" value="alphabetDesc">
+              <button type="submit" class="dropdown-item {{#if alphabetDesc}} active {{/if}}">Z - A</button>
+            </form>
+          </li>
+
+          <li>
+            <form action="/restaurants" method="get">
+              <input type="hidden" name="sortStatus" value="categories">
+              <button type="submit" class="dropdown-item {{#if categories}} active {{/if}}">類別</button>
+            </form>
+          </li>
+
+          <li>
+            <form action="/restaurants" method="get">
+              <input type="hidden" name="sortStatus" value="location">
+              <button type="submit" class="dropdown-item {{#if location}} active {{/if}}">地區</button>
+            </form>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </div>
 
 {{> flash-msg}}
 
 <!-- restaurant list -->
-<div class="container mt-5">
+<div class="container mt-3">
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
       <div class="row row-cols-sm-3">

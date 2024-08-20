@@ -1,0 +1,77 @@
+<!-- search bar -->
+<div class="container search-bar">
+    <div class="search-bar-outer">
+        <div class="search-bar-inner">
+            <form action="/restaurants/search" method="get">
+                <h4 class="mb-2">尋找餐廳：</h4>
+                <div class="input-group">
+                    <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類"
+                        aria-label="Restaurant Name..." value="{{keyword}}" aria-describedby="search-button">
+                    <div class="input-group-append">
+                        <button class="btn btn-major" type="submit" id="search-button"><i
+                                class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{> flash-msg}}
+
+<!-- restaurant list -->
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-10 col-12 mx-auto">
+            <div class="row row-cols-sm-3">
+                {{#each restaurants as |restaurant|}}
+                {{#with restaurant}}
+                <div class="mb-4">
+                    <a href="/restaurants/{{id}}" class="text-secondary">
+                        <div class="card mb-2">
+                            <img class="card-img-top" src="{{image}}" alt="{{name}}">
+                            <div class="card-body p-3">
+                                <h6 class="card-title mb-1">{{name}}</h6>
+
+                                <div class="restaurant-category mb-1">
+                                    <i class="fas fa-utensils pr-2"></i> {{category}}
+                                </div>
+
+                                <span class="badge rounded-pill bg-danger font-weight-normal">
+                                    {{rating}}
+                                    <i class="fas fa-star fa-xs"></i>
+                                </span>
+
+                            </div>
+                        </div>
+                    </a>
+
+                    <div class="d-flex justify-content-end">
+
+                        <div class="ms-2">
+                            <a href="/restaurants/{{id}}/edit">
+                                <button type="button" class="btn btn-light">編輯</button>
+                            </a>
+                        </div>
+
+                        <div class="ms-2">
+                            <a href="/restaurants/{{id}}">
+                                <button type="button" class="btn btn-light">瀏覽</button>
+                            </a>
+                        </div>
+
+                        <div class="ms-2">
+                            <a href="/restaurants/{{id}}/delete-confirm">
+                                <button type="button" class="btn btn-danger">刪除</button>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+                {{/with}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
