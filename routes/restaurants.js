@@ -1,17 +1,20 @@
 const express = require('express')
+
 const db = require('../models')
-const { Op } = require('sequelize')
 const { getOrderCondition, sortButtonActiveSwitcher } = require('../scripts/sort-restaurants')
 
 const router = express.Router()
 const Restaurant = db.Restaurant
+const { Op } = require('sequelize')
 
 router.get('/', (req, res, next) => {
     const incomingSortStatus = req.query.sortStatus || 'none'
+    const userId = req.user.id
 
     sortButtonActiveSwitcher(res, incomingSortStatus)
 
     return Restaurant.findAll({
+        where: { userId },
         order: getOrderCondition(incomingSortStatus),
         raw: true
     }).then((restaurants) => {
@@ -46,6 +49,7 @@ router.get('/new', (req, res, next) => {
 router.post('/', (req, res, next) => {
     const body = req.body
     body.rating = Number(body.rating)
+    body.userId = req.user.id
 
     return Restaurant.create(body).then((results) => {
         req.flash('success-msg', '新增成功')
@@ -58,10 +62,12 @@ router.post('/', (req, res, next) => {
 
 router.get('/search', (req, res, next) => {
     const keyword = req.query.keyword?.trim()
+    const userId = req.user.id
 
     return Restaurant.findAll(
         {
             where: {
+                userId,
                 [Op.or]: {
                     name: {
                         [Op.like]: `%${keyword}%`
@@ -76,23 +82,29 @@ router.get('/search', (req, res, next) => {
     ).then((data) => {
         if (!data.length) {
             return res.render('unmatched', { keyword })
-        } else {
-            return res.render('restaurants-search', { restaurants: data, keyword })
         }
+
+        return res.render('restaurants-search', { restaurants: data, keyword })
     }).catch((err) => {
         next(err)
     })
 })
 
 router.get('/:id', (req, res, next) => {
-    const id = req.params.id
+    const restaurantId = req.params.id
+    const userId = req.user.id
 
     return Restaurant.findByPk(
-        Number(id),
+        Number(restaurantId),
         {
             raw: true
         }
     ).then((restaurant) => {
+        if (!restaurant || userId !== restaurant.userId) {
+            req.flash('err-msg', '找不到資料') // 我認為'找不到資料'透露的訊息比'沒有權限'少，所以在使用者id不符合時我也用'找不到資料'
+            return res.redirect('/restaurants')
+        }
+
         return res.render('detail', { restaurant })
     }).catch((err) => {
         err.err_msg = '取得餐廳細部資料失敗'
@@ -101,12 +113,13 @@ router.get('/:id', (req, res, next) => {
 })
 
 router.get('/:id/edit', (req, res, next) => {
-    const id = req.params.id
+    const restaurantId = req.params.id
+    const userId = req.user.id
 
     return Promise.all(
         [
             Restaurant.findByPk(
-                Number(id),
+                Number(restaurantId),
                 {
                     raw: true
                 }
@@ -125,6 +138,12 @@ router.get('/:id/edit', (req, res, next) => {
         ]
     ).then((data) => {
         const [restaurant, rawCategories] = data
+
+        if (!restaurant || userId !== restaurant.userId) {
+            req.flash('err-msg', '找不到資料')
+            return res.redirect('/restaurants')
+        }
+
         const restaurantCategories = []
         rawCategories.forEach(element => {
             if (!restaurantCategories.some(category => element.category === category)) {
@@ -138,34 +157,38 @@ router.get('/:id/edit', (req, res, next) => {
 })
 
 router.put('/:id', (req, res, next) => {
-    const id = req.params.id
+    const restaurantId = req.params.id
     const body = req.body
+    const userId = req.user.id
     body.rating = Number(body.rating)
 
-    return Restaurant.update(
-        body,
-        {
-            where: {
-                id: Number(id)
-            }
+    return Restaurant.findByPk(Number(restaurantId)).then((restaurant) => {
+        if (!restaurant || userId !== restaurant.userId) {
+            req.flash('err-msg', '找不到欲修改的資料')
+            return res.redirect('/restaurants')
         }
-    ).then((results) => {
+
+        return restaurant.update(body)
+    }).then(() => {
         req.flash('success-msg', '編輯成功')
-        return res.redirect(`/restaurants/${id}`)
+        return res.redirect(`/restaurants/${restaurantId}`)
     }).catch((err) => {
         err.err_msg = '編輯餐廳資料失敗'
         next(err)
     })
-
 })
 
 // 做一個delete confirm頁面
 router.get('/:id/delete-confirm', (req, res, next) => {
-    const id = req.params.id
+    const restaurantId = req.params.id
+    const userId = req.user.id
 
-    return Restaurant.findByPk(Number(id), {
-        raw: true
-    }).then((restaurant) => {
+    return Restaurant.findByPk(Number(restaurantId)).then((restaurant) => {
+        if (!restaurant || userId !== restaurant.userId) {
+            req.flash('err-msg', '找不到欲刪除的資料')
+            return res.redirect('/restaurants')
+        }
+
         const { id, name } = restaurant
         return res.render('delete-confirm', { id, name })
     }).catch((err) => {
@@ -175,14 +198,18 @@ router.get('/:id/delete-confirm', (req, res, next) => {
 })
 
 router.delete('/:id', (req, res, next) => {
-    const id = req.params.id
+    const restaurantId = req.params.id
     const deleteRestaurantName = req.body.delete_restaurant_name
+    const userId = req.user.id
 
-    return Restaurant.destroy({
-        where: {
-            id: Number(id)
+    return Restaurant.findByPk(Number(restaurantId)).then((restaurant) => {
+        if (!restaurant || userId !== restaurant.userId) {
+            req.flash('err-msg', '找不到欲刪除的資料')
+            return res.redirect('/restaurants')
         }
-    }).then((results) => {
+
+        return restaurant.destroy()
+    }).then(() => {
         req.flash('success-msg', '成功刪除')
         req.flash('delete-restaurant-name', deleteRestaurantName)
         return res.redirect('/restaurants')

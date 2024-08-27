@@ -1,0 +1,36 @@
+<h1>登入</h1>
+
+{{> flash-msg}}
+
+<form action="/login" method="post">
+
+    <div>
+        <div>
+            <label for="email">電子郵件</label>
+        </div>
+        <div>
+            <input type="email" id="email" name="email" placeholder="輸入電子郵件" required>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <label for="password">密碼</label>
+        </div>
+        <div>
+            <input type="password" id="password" name="password" placeholder="輸入密碼" required>
+        </div>
+    </div>
+
+    <div>
+        <button type="submit">登入</button>
+    </div>
+
+</form>
+
+<div>
+    <span>還沒有帳號嗎？</span>
+    <a href="/register">
+        <button type="button">註冊帳號</button>
+    </a>
+</div>

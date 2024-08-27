@@ -1,0 +1,54 @@
+<h1>註冊帳號</h1>
+
+{{> flash-msg}}
+
+<form action="/users" method="post">
+
+    <div>
+        <div>
+            <label for="name">帳號名字</label>
+        </div>
+        <div>
+            <input type="text" id="name" name="name" placeholder="輸入名字或暱稱，非必填">
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <label for="email">電子郵件</label>
+        </div>
+        <div>
+            <input type="email" id="email" name="email" placeholder="輸入電子郵件" required>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <label for="password">密碼</label>
+        </div>
+        <div>
+            <input type="password" id="password" name="password" placeholder="輸入密碼" required>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <label for="confirmPassword">確認密碼</label>
+        </div>
+        <div>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="再次輸入密碼" required>
+        </div>
+    </div>
+
+    <div>
+        <button type="submit">註冊</button>
+    </div>
+
+</form>
+
+<div>
+    <span>已經有帳號了？</span>
+    <a href="/login">
+        <button type="button">返回登入頁</button>
+    </a>
+</div>
