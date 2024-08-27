@@ -4,14 +4,13 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash')
 const passport = require('passport')
+if (process.env.NODE_ENV === 'development') {
+    require('dotenv').config()
+}
 
 const router = require('./routes')
 const flashMessageHandler = require('./middlewares/flash-message-handler')
 const errorHandler = require('./middlewares/error-handler')
-
-if (process.env.NODE_ENV === 'development') {
-    require('dotenv').config()
-}
 
 const app = express()
 const port = 3000

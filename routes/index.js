@@ -1,48 +1,11 @@
 const express = require('express')
-const passport = require('passport')
-const LocalStrategy = require('passport-local')
-const bcrypt = require('bcryptjs')
 
+const passport = require('../config/passport')
 const restaurantsRouter = require('./restaurants')
 const usersRouter = require('./users')
-const db = require('../models')
 const authHandler = require('../middlewares/auth-handler')
 
 const router = express.Router()
-const User = db.User
-
-passport.use(new LocalStrategy({ usernameField: 'email' }, (username, password, done) => {
-    return User.findOne({
-        attributes: ['id', 'email', 'password'],
-        where: {
-            email: username
-        },
-        raw: true
-    }).then((user) => {
-        if (!user) {
-            return done(null, false, { type: 'err-msg', message: '電子郵件或密碼錯誤' })
-        }
-
-        return bcrypt.compare(password, user.password).then((isMatched) => {
-            if (!isMatched) {
-                return done(null, false, { type: 'err-msg', message: '電子郵件或密碼錯誤' })
-            }
-
-            return done(null, user)
-        })
-    }).catch((err) => {
-        err.err_msg = '登入失敗'
-        return done(err)
-    })
-}))
-
-passport.serializeUser((user, done) => {
-    return done(null, user)
-})
-
-passport.deserializeUser((user, done) => {
-    return done(null, { id: user.id })
-})
 
 router.use('/restaurants', authHandler, restaurantsRouter)
 router.use('/users', usersRouter)
@@ -64,6 +27,16 @@ router.post('/login', passport.authenticate('local', {
 router.get('/register', (req, res) => {
     res.render('register')
 })
+
+router.get('/login/facebook', passport.authenticate('facebook', {
+    scope: ['email']
+}))
+
+router.get('/oauth2/redirect/facebook', passport.authenticate('facebook', {
+    successRedirect: '/restaurants',
+    failureRedirect: '/login',
+    failureFlash: true
+}))
 
 router.post('/logout', (req, res, next) => {
     req.logout((err) => {
