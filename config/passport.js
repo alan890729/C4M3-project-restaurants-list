@@ -37,7 +37,7 @@ passport.use(new FacebookStrategy({
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
     callbackURL: process.env.FACEBOOK_CALLBACK_URL,
     profileFields: ['displayName', 'email']
-}, (acessToken, refreshToken, profile, done) => {
+}, (accessToken, refreshToken, profile, done) => {
     const name = profile.displayName
     const email = profile.emails[0].value
 

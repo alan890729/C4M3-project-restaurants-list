@@ -1,60 +1,73 @@
-<h1>註冊帳號</h1>
+<div class="container">
 
-{{> flash-msg}}
+    <div class="row">
 
-<form action="/users" method="post">
+        <div class="col-md-10 col-12 mx-auto">
 
-    <div>
-        <div>
-            <label for="name">帳號名字</label>
+            <h1 class="my-3">註冊帳號</h1>
+
+            {{> flash-msg}}
+
+            <form action="/users" method="post" class="mb-3">
+
+                <div class="row mb-3">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <label for="name" class="form-label mb-0">帳號名字</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="輸入名字或暱稱，非必填">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <label for="email" class="form-label mb-0">電子郵件</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="輸入電子郵件" required>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <label for="password" class="form-label mb-0">密碼</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="輸入密碼" required>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <label for="confirmPassword" class="form-label mb-0">確認密碼</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="再次輸入密碼"
+                            required>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-light">註冊</button>
+                </div>
+
+            </form>
+
+            <div class="mb-3">
+                <form action="/login/facebook">
+                    <button type="submit" class="btn btn-light">Facebook登入</button>
+                </form>
+            </div>
+
+            <div>
+                <span class="form-text">已經有帳號了？</span>
+                <a href="/login">
+                    <button type="button" class="btn btn-light">返回登入頁</button>
+                </a>
+            </div>
+
         </div>
-        <div>
-            <input type="text" id="name" name="name" placeholder="輸入名字或暱稱，非必填">
-        </div>
+
     </div>
 
-    <div>
-        <div>
-            <label for="email">電子郵件</label>
-        </div>
-        <div>
-            <input type="email" id="email" name="email" placeholder="輸入電子郵件" required>
-        </div>
-    </div>
-
-    <div>
-        <div>
-            <label for="password">密碼</label>
-        </div>
-        <div>
-            <input type="password" id="password" name="password" placeholder="輸入密碼" required>
-        </div>
-    </div>
-
-    <div>
-        <div>
-            <label for="confirmPassword">確認密碼</label>
-        </div>
-        <div>
-            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="再次輸入密碼" required>
-        </div>
-    </div>
-
-    <div>
-        <button type="submit">註冊</button>
-    </div>
-
-</form>
-
-<div>
-    <form action="/login/facebook">
-        <button type="submit">Facebook登入</button>
-    </form>
-</div>
-
-<div>
-    <span>已經有帳號了？</span>
-    <a href="/login">
-        <button type="button">返回登入頁</button>
-    </a>
 </div>

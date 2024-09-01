@@ -1,11 +1,13 @@
 const express = require('express')
 
+const db = require('../models')
 const passport = require('../config/passport')
 const restaurantsRouter = require('./restaurants')
 const usersRouter = require('./users')
 const authHandler = require('../middlewares/auth-handler')
 
 const router = express.Router()
+const User = db.User
 
 router.use('/restaurants', authHandler, restaurantsRouter)
 router.use('/users', usersRouter)
@@ -15,7 +17,25 @@ router.get('/', (req, res) => {
 })
 
 router.get('/login', (req, res) => {
-    res.render('login')
+    if (!req.user?.id) {
+        return res.render('login')
+    }
+
+    return User.findByPk(
+        req.user.id,
+        {
+            attributes: ['name', 'email'],
+            raw: true
+        }
+    ).then((user) => {
+        if (user.name) {
+            req.flash('success-msg', `先前是以${user.name}的身分登入，如果要切換身分請先登出`)
+            return res.redirect('/restaurants')
+        }
+
+        req.flash('success-msg', `先前是以${user.email}的身分登入，如果要切換身分請先登出`)
+        return res.redirect('/restaurants')
+    })
 })
 
 router.post('/login', passport.authenticate('local', {
