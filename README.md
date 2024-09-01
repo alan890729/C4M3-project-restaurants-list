@@ -4,23 +4,26 @@
 
 ## 專案畫面
 
-![image](https://github.com/alan890729/C4M2-project-restaurants-list/blob/main/public/images/read-all-restaurants.png)
-![image](https://github.com/alan890729/C4M2-project-restaurants-list/blob/main/public/images/read-detail-restaurants.png)
-![image](https://github.com/alan890729/C4M2-project-restaurants-list/blob/main/public/images/search-restaurant-ci.png)
-![image](https://github.com/alan890729/C4M2-project-restaurants-list/blob/main/public/images/search-restaurant-category.png)
-![image](https://github.com/alan890729/C4M2-project-restaurants-list/blob/main/public/images/create-restaurant.png)
-![image](https://github.com/alan890729/C4M2-project-restaurants-list/blob/main/public/images/edit-restaurant.png)
+![image](https://github.com/alan890729/C4M3-project-restaurants-list/blob/main/public/images/read-all-restaurants.png)
+![image](https://github.com/alan890729/C4M3-project-restaurants-list/blob/main/public/images/read-detail-restaurants.png)
+![image](https://github.com/alan890729/C4M3-project-restaurants-list/blob/main/public/images/search-restaurant-ci.png)
+![image](https://github.com/alan890729/C4M3-project-restaurants-list/blob/main/public/images/search-restaurant-category.png)
+![image](https://github.com/alan890729/C4M3-project-restaurants-list/blob/main/public/images/create-restaurant.png)
+![image](https://github.com/alan890729/C4M3-project-restaurants-list/blob/main/public/images/edit-restaurant.png)
 
 ## Features - 產品功能
 
-1. 使用者可以瀏覽全部的餐廳
-2. 使用者可以點擊某餐廳瀏覽該餐廳的細節資訊
-3. 使用者可以依照店名進行搜尋
-4. 使用者可以依照餐廳類別進行搜尋
-5. 使用者可以新增餐廳到清單
-6. 使用者可以編輯清單中的餐廳
-7. 使用者可以刪除清單中的餐廳
-8. 使用者可以在瀏覽全部的餐廳頁面，排序餐廳的顯示順序
+1. 使用者可以註冊帳號
+2. 使用者可以登入用註冊功能註冊的帳號
+3. 使用者可以用facebook登入
+4. 使用者可以瀏覽隸屬於其帳號下的全部的餐廳
+5. 使用者可以點擊某餐廳瀏覽該餐廳的細節資訊
+6. 使用者可以依照店名進行搜尋
+7. 使用者可以依照餐廳類別進行搜尋
+8. 使用者可以新增餐廳到清單
+9. 使用者可以編輯清單中的餐廳
+10. 使用者可以刪除清單中的餐廳
+11. 使用者可以在瀏覽全部的餐廳頁面，排序餐廳的顯示順序
 
 ## Getting Started - 啟動專案
 
@@ -44,17 +47,21 @@
 - [express-session](https://www.npmjs.com/package/express-session)
 - [connect-flash](https://www.npmjs.com/package/connect-flash)
 - [dotenv](https://www.npmjs.com/package/dotenv)
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+- [passport](https://www.npmjs.com/package/passport)
+- [passport-local](https://www.npmjs.com/package/passport-local)
+- [passport-facebook](https://www.npmjs.com/package/passport-facebook)
 
 ### Installing - 專案安裝流程
 
 1. 打開terminal，輸入
     ```
-    git clone https://github.com/alan890729/C4M2-project-restaurants-list.git
+    git clone https://github.com/alan890729/C4M3-project-restaurants-list.git
     ```
 
 2. 開啟終端機(Terminal)，進入存放此專案的資料夾
     ```
-    cd C4M2-project-restaurants-list
+    cd C4M3-project-restaurants-list
     ```
 
 3. 安裝 npm 套件
@@ -88,18 +95,15 @@
 
       進到./config/config.json把"development"之下的"username", "password"的值改成你自己MySQL WorkBench使用的username和password，"database"的值則改成"test-database"
 
-6. 執行db migrate和db seed
+5. 執行db migrate和db seed
 
     資料庫建立好後，打開終端機並移動到此專案目錄之下，輸入以下指令：
     ```
-    npx sequelize db:migrate
+    npm run seed
     ```
-    上面指令完成後接著輸入以下指令：
-    ```
-    npx sequelize db:seed:all
-    ```
+    上面的指令會執行migration以及植入種子資料
 
-5. 是否已經安裝nodemon
+6. 是否已經安裝nodemon
   
     - 已有nodemon，直接輸入以下指令啟動專案
         ```
@@ -112,7 +116,7 @@
         npm install -g nodemon
         ```
 
-       接著再回到 **C4M2-project-restaurants-list** 資料夾內，輸入：
+       接著再回到 **C4M3-project-restaurants-list** 資料夾內，輸入：
        ```
        npm run dev
        ```
