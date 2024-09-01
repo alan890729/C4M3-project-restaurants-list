@@ -107,9 +107,16 @@
 
 7. 是否已經安裝nodemon
   
-    - 已有nodemon，直接輸入以下指令啟動專案
+    - 已有nodemon，直接根據作業系統是windows或是unix-like，去各自輸入以下指令啟動專案
+
+        windows:
         ```
-        npm run dev
+        npm run dev:windows
+        ```
+
+        unix:
+        ```
+        npm run dev:unix
         ```
         server會在 <http://localhost:3000> 執行
 
@@ -118,10 +125,17 @@
         npm install -g nodemon
         ```
 
-       接著再回到 **C4M3-project-restaurants-list** 資料夾內，輸入：
-       ```
-       npm run dev
-       ```
+        接著再回到 **C4M3-project-restaurants-list** 資料夾內，輸入：
+
+        windows:
+        ```
+        npm run dev:windows
+        ```
+
+        unix:
+        ```
+        npm run dev:unix
+        ```
 
 ## Authors
 
