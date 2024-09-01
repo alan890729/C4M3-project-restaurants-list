@@ -103,7 +103,9 @@
     ```
     上面的指令會執行migration以及植入種子資料
 
-6. 是否已經安裝nodemon
+6. 參考.env.example的模板建立自己的.env
+
+7. 是否已經安裝nodemon
   
     - 已有nodemon，直接輸入以下指令啟動專案
         ```
